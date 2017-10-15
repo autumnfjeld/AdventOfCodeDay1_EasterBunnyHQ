@@ -24,6 +24,12 @@ Test.prototype.runTest = function () {
     this.testInput.forEach(function (input) {
         console.log('\n___Test ', input.id, '___');
         bunnyTrip = new FindEasterBunnyHQ(input.sequence);
+        console.log('Test ', input.id, 'Result |  Expected Blocks:', input.expectedBlocksAway, ' Actual Blocks:', bunnyTrip.minimumBlocksAway);
+        if (bunnyTrip.minimumBlocksAway === input.expectedBlocksAway) {
+            console.log('Yipee!  Test passed!');
+        } else {
+            console.log('UhOh. Test failed. :( ');
+        }
     });
 };
 
