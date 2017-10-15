@@ -7,6 +7,7 @@
  *  - Grid is comprised of squares, every block is equidistant
  *  - Dr. Bunny is 'theoretically' moving about the grid in order to compute the location of Easter
  *    Bunny HQ and comments below refer to her in this sense
+ *  - Start position is [0,0] on Cartesian grin
  *
  **************************************/
 
@@ -96,6 +97,7 @@ function FindEasterBunnyHQ(sequence) {
     this.parsedSequence = this.parseSequence(sequence);
     console.log('FindEasterBunnyHQ', this);
     this.hopAlongTheBlocks();
+    this.computeMinBunnyBlocks();
 }
 
 /**
@@ -121,6 +123,14 @@ FindEasterBunnyHQ.prototype.hopAlongTheBlocks = function () {
         this.direction.turn(instruction.turn);
         this.position.updatePosition(instruction.distance, this.direction.vector);
     }.bind(this));
+};
+
+/**
+ * Compute the minimum number of blocks Dr. Bunny could travel to get from her start position to final position
+ * Start position is [0,0]
+ */
+FindEasterBunnyHQ.prototype.computeMinBunnyBlocks = function(){
+    this.minimumBlocksAway = Math.abs(this.position.x - 0) + Math.abs(this.position.y - 0);
 };
 
 
