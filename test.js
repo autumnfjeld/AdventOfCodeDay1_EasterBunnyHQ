@@ -11,15 +11,22 @@ var FindEasterBunnyHQ = require("./gobunny.js");
  * @param {Array} testInput - array of objects with test input and expected result
  * @constructor
  */
-function Test(testInput){
+function Test(testInput) {
     this.testInput = testInput;
 }
 
 /**
- * Executes running the EasterBunnyHQ app and checks results
+ * Execute running the EasterBunnyHQ app and checks results
  */
-Test.prototype.runTest = function(){
-    console.log('\n****** Running Tests ****** \nFindEasterBunnyHQ', this.testInput);
+Test.prototype.runTest = function () {
+    console.log('\n****** Running FindEasterBunnyHQ Tests ******\n', this.testInput);
+    var bunnyTrip;
+    this.testInput.forEach(function (input) {
+        console.log('\n___Test ', input.id, '___');
+        bunnyTrip = new FindEasterBunnyHQ(input.sequence);
+        console.log('TESTING bunnyTrip', bunnyTrip);
+        console.log('bunnyTrip.direction', bunnyTrip.direction);
+    });
 };
 
 var testInput = [
@@ -40,6 +47,14 @@ var testInput = [
     }
 ];
 
-var tempTest = new Test(testInput);
-tempTest.runTest();
+/**
+ * Export function to call via npm script command using make-runnable module
+ */
+function run() {
+    var test = new Test(testInput);
+    test.runTest();
+}
 
+module.exports = run;
+
+require('make-runnable');
