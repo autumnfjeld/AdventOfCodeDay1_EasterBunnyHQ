@@ -4,7 +4,8 @@
   "description": "AdventOfCodeDay1_EasterBunnyHQ",
   "main": "gobunny.js",
   "scripts": {
-    "test": "node test.js run"
+    "test": "node test.js run",
+    "goBunny": "node gobunny.js run"
   },
   "repository": {
     "type": "git",
