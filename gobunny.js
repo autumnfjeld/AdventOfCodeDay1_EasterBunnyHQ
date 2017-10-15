@@ -1,6 +1,6 @@
 'use strict';
 
-/**************************************
+/****************************************************************************
  *  Easter Bunny HQ App
  *
  *  Assumptions/Decisions
@@ -9,7 +9,7 @@
  *    Bunny HQ and comments below refer to her in this sense
  *  - Start position is [0,0] on Cartesian grin
  *
- **************************************/
+ ****************************************************************************/
 
 
 /**
@@ -18,7 +18,6 @@
  * Coordinates in x,y vector form:  North [0, 1], South [0, -1], East [1,0], West [-1,0]
  * @constructor
  */
-
 function Direction() {
     this.vector = {
         x: 0,
@@ -52,6 +51,7 @@ Direction.prototype.swap = function (sign) {
     this.vector.y = temp * sign;
 };
 
+
 /**
  * Track the position of Dr. Bunny in the city grid in terms of a Cartesian grid
  * @constructor
@@ -71,15 +71,16 @@ Position.prototype.updatePosition = function (distance, directionVector) {
         console.error('Cannot move Dr. Bunny without distance and direction vector');
         return;
     }
-    console.log('  Update position by ',  distance, 'units in ', directionVector, 'direction');
-    console.log('  BEFORE moving ',  'x:', this.x, ' y:', this.y);
+    console.log('  Update position by ', distance, 'units in ', directionVector, 'direction');
+    console.log('  BEFORE moving ', 'x:', this.x, ' y:', this.y);
     if (directionVector.x === 0) {
         this.y += distance * directionVector.y;
     } else {
         this.x += distance * directionVector.x;
     }
-    console.log('  AFTER moving ',  ' x:', this.x, ' y:', this.y);
+    console.log('  AFTER moving ', ' x:', this.x, ' y:', this.y);
 };
+
 
 /**
  * Find the location of the Easter Bunny HQ from a given sequence of movements in a city grid
