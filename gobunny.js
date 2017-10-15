@@ -39,12 +39,31 @@ function Position() {
  * @param {Array} sequence
  * @constructor
  */
-function FindEasterBunnyHQ(sequence){
+function FindEasterBunnyHQ(sequence) {
+    if (!sequence) {
+        console.error('FindEasterBunnyHQ requires a sequence of movements');
+        return;
+    }
     this.direction = new Direction();
     this.position = new Position();
     this.minimumBlocksAway = null;
-    console.log('Check FindEasterBunnyHQ', this);
+    this.parsedSequence = this.parseSequence(sequence);
+    console.log('FindEasterBunnyHQ', this);
 }
+
+/**
+ * Break the sequence strings into turn direction and travel distance
+ * @param {Array} sequence
+ * @returns {Array}
+ */
+FindEasterBunnyHQ.prototype.parseSequence = function(sequence){
+    return sequence.map(function(instruction){
+        return {
+            turn: instruction.slice(0,1),
+            distance: instruction.slice(1)
+        };
+    });
+};
 
 
 module.exports = FindEasterBunnyHQ;
