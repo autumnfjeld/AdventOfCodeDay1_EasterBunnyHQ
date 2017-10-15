@@ -1,6 +1,6 @@
 'use strict';
 
-var FindEasterBunnyHQ = require("./gobunny.js");
+var FindEasterBunnyHQ = require("./gobunny.js").FindEasterBunnyHQ;
 
 /**
  * Test EasterBunnyHQ using the provided examples from http://adventofcode.com/2016/day/1
@@ -24,6 +24,7 @@ Test.prototype.runTest = function () {
     this.testInput.forEach(function (input) {
         console.log('\n___Test ', input.id, '___');
         bunnyTrip = new FindEasterBunnyHQ(input.sequence);
+        bunnyTrip.go();
         console.log('Test ', input.id, 'Result |  Expected Blocks:', input.expectedBlocksAway, ' Actual Blocks:', bunnyTrip.minimumBlocksAway);
         if (bunnyTrip.minimumBlocksAway === input.expectedBlocksAway) {
             console.log('Yipee!  Test passed!');

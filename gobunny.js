@@ -96,9 +96,6 @@ function FindEasterBunnyHQ(sequence) {
     this.position = new Position();
     this.minimumBlocksAway = null;
     this.parsedSequence = this.parseSequence(sequence);
-    console.log('FindEasterBunnyHQ', this);
-    this.hopAlongTheBlocks();
-    this.computeMinBunnyBlocks();
 }
 
 /**
@@ -113,6 +110,14 @@ FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
             distance: instruction.slice(1)
         };
     });
+};
+
+/**
+ * Get Dr. Bunny on her way, this starts the computation of movement in the Cartesian grid
+ */
+FindEasterBunnyHQ.prototype.go = function(){
+    this.hopAlongTheBlocks();
+    this.computeMinBunnyBlocks();
 };
 
 /**
@@ -150,6 +155,7 @@ function run() {
     };
 
     var bunnyTrip = new FindEasterBunnyHQ(input.sequence);
+    bunnyTrip.go()
     return bunnyTrip.minimumBlocksAway;
 }
 
