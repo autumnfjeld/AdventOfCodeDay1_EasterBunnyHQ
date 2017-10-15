@@ -30,7 +30,10 @@ function Direction() {
  * @param {string} turnDirection
  */
 Direction.prototype.turn = function (turnDirection) {
-    console.log('  BEFORE current DirectionVector', this.vector.x, this.vector.y);
+    if (!turnDirection) {
+        console.error('Dr. Bunny cannot turn without a turnDirection. Check the program input.');
+        return;
+    }
     if (this.vector.x === 0) {
         // If current direction is North/South a right turn will persist the sign of new direction vector in the x,y grid
         turnDirection === 'R' ? this.swap(1) : this.swap(-1);
@@ -38,7 +41,6 @@ Direction.prototype.turn = function (turnDirection) {
         // If current direction is East/West a right turn will negate the sign of new direction vector
         turnDirection === 'R' ? this.swap(-1) : this.swap(1);
     }
-    console.log('  AFTER current DirectionVector', this.vector.x, this.vector.y);
 };
 
 /**
@@ -68,17 +70,14 @@ function Position() {
  */
 Position.prototype.updatePosition = function (distance, directionVector) {
     if (!distance || !directionVector) {
-        console.error('Cannot move Dr. Bunny without distance and direction vector');
+        console.error('Cannot move Dr. Bunny without distance and direction vector. Check the program input.');
         return;
     }
-    console.log('  Update position by ', distance, 'units in ', directionVector, 'direction');
-    console.log('  BEFORE moving ', 'x:', this.x, ' y:', this.y);
     if (directionVector.x === 0) {
         this.y += distance * directionVector.y;
     } else {
         this.x += distance * directionVector.x;
     }
-    console.log('  AFTER moving ', ' x:', this.x, ' y:', this.y);
 };
 
 
@@ -89,7 +88,7 @@ Position.prototype.updatePosition = function (distance, directionVector) {
  */
 function FindEasterBunnyHQ(sequence) {
     if (!sequence) {
-        console.error('FindEasterBunnyHQ requires a sequence of movements');
+        console.error('FindEasterBunnyHQ requires a sequence of movements. Check the program input.');
         return;
     }
     this.direction = new Direction();
@@ -118,6 +117,9 @@ FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
 FindEasterBunnyHQ.prototype.go = function(){
     this.hopAlongTheBlocks();
     this.computeMinBunnyBlocks();
+    console.log('****************************************************************');
+    console.log( 'Dr. Bunny could get from her start point to Easter Bunny HQ in a mere ', this.minimumBlocksAway);
+    console.log('****************************************************************');
 };
 
 /**
@@ -125,7 +127,6 @@ FindEasterBunnyHQ.prototype.go = function(){
  */
 FindEasterBunnyHQ.prototype.hopAlongTheBlocks = function () {
     this.parsedSequence.forEach(function (instruction) {
-        console.log('parsing instruction', instruction);
         this.direction.turn(instruction.turn);
         this.position.updatePosition(instruction.distance, this.direction.vector);
     }.bind(this));
