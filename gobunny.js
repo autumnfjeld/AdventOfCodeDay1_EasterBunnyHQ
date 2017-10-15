@@ -12,7 +12,7 @@
 
 
 /**
- * Tracks the direction in which Dr. Bunny is facing as she 'theoretically' moves about the grid
+ * Track the direction in which Dr. Bunny is facing as she 'theoretically' moves about the grid
  * Initial direction is facing north
  * Coordinates in x,y vector form:  North [0, 1], South [0, -1], East [1,0], West [-1,0]
  * @constructor
@@ -26,7 +26,33 @@ function Direction() {
 }
 
 /**
- * Tracks the position of Dr. Bunny in the city grid in terms of a Cartesian grid
+ * Compute the new direction vector that results from a R or L turn instruction
+ * @param {string} turnDirection
+ */
+Direction.prototype.turn = function (turnDirection) {
+    console.log('  BEFORE current DirectionVector', this.vector.x, this.vector.y);
+    if (this.vector.x === 0) {
+        // If current direction is North/South a right turn will persist the sign of new direction vector in the x,y grid
+        turnDirection === 'R' ? this.swap(1) : this.swap(-1);
+    } else {
+        // If current direction is East/West a right turn will negate the sign of new direction vector
+        turnDirection === 'R' ? this.swap(-1) : this.swap(1);
+    }
+    console.log('  AFTER current DirectionVector', this.vector.x, this.vector.y);
+};
+
+/**
+ * Swap the x, y values in the direction vector
+ * @param sign
+ */
+Direction.prototype.swap = function (sign) {
+    var temp = this.vector.x;
+    this.vector.x = this.vector.y * sign;
+    this.vector.y = temp * sign;
+};
+
+/**
+ * Track the position of Dr. Bunny in the city grid in terms of a Cartesian grid
  * @constructor
  */
 function Position() {
@@ -35,7 +61,7 @@ function Position() {
 }
 
 /**
- * Finds the location of the Easter Bunny HQ from a given sequence of movements in a city grid
+ * Find the location of the Easter Bunny HQ from a given sequence of movements in a city grid
  * @param {Array} sequence
  * @constructor
  */
@@ -49,6 +75,7 @@ function FindEasterBunnyHQ(sequence) {
     this.minimumBlocksAway = null;
     this.parsedSequence = this.parseSequence(sequence);
     console.log('FindEasterBunnyHQ', this);
+    this.hopAlongTheBlocks();
 }
 
 /**
@@ -56,13 +83,23 @@ function FindEasterBunnyHQ(sequence) {
  * @param {Array} sequence
  * @returns {Array}
  */
-FindEasterBunnyHQ.prototype.parseSequence = function(sequence){
-    return sequence.map(function(instruction){
+FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
+    return sequence.map(function (instruction) {
         return {
-            turn: instruction.slice(0,1),
+            turn: instruction.slice(0, 1),
             distance: instruction.slice(1)
         };
     });
+};
+
+/**
+ * Move Dr. Bunny through the grid by computing the new direction and distance traveled for each sequence instruction
+ */
+FindEasterBunnyHQ.prototype.hopAlongTheBlocks = function () {
+    this.parsedSequence.forEach(function (instruction) {
+        console.log('parsing instruction', instruction);
+        this.direction.turn(instruction.turn);
+    }.bind(this));
 };
 
 
