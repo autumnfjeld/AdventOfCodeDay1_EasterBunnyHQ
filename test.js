@@ -24,8 +24,6 @@ Test.prototype.runTest = function () {
     this.testInput.forEach(function (input) {
         console.log('\n___Test ', input.id, '___');
         bunnyTrip = new FindEasterBunnyHQ(input.sequence);
-        console.log('TESTING bunnyTrip', bunnyTrip);
-        console.log('bunnyTrip.direction', bunnyTrip.direction);
     });
 };
 

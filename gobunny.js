@@ -61,6 +61,26 @@ function Position() {
 }
 
 /**
+ * Update Dr. Bunny's position by computing the distance moved in the specified direction
+ * @param distance
+ * @param directionVector
+ */
+Position.prototype.updatePosition = function (distance, directionVector) {
+    if (!distance || !directionVector) {
+        console.error('Cannot move Dr. Bunny without distance and direction vector');
+        return;
+    }
+    console.log('  Update position by ',  distance, 'units in ', directionVector, 'direction');
+    console.log('  BEFORE moving ',  'x:', this.x, ' y:', this.y);
+    if (directionVector.x === 0) {
+        this.y += distance * directionVector.y;
+    } else {
+        this.x += distance * directionVector.x;
+    }
+    console.log('  AFTER moving ',  ' x:', this.x, ' y:', this.y);
+};
+
+/**
  * Find the location of the Easter Bunny HQ from a given sequence of movements in a city grid
  * @param {Array} sequence
  * @constructor
@@ -99,6 +119,7 @@ FindEasterBunnyHQ.prototype.hopAlongTheBlocks = function () {
     this.parsedSequence.forEach(function (instruction) {
         console.log('parsing instruction', instruction);
         this.direction.turn(instruction.turn);
+        this.position.updatePosition(instruction.distance, this.direction.vector);
     }.bind(this));
 };
 
