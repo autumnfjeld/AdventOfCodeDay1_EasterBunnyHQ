@@ -117,9 +117,9 @@ FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
 FindEasterBunnyHQ.prototype.go = function(){
     this.hopAlongTheBlocks();
     this.computeMinBunnyBlocks();
-    console.log('****************************************************************');
-    console.log( 'Dr. Bunny could get from her start point to Easter Bunny HQ in a mere ', this.minimumBlocksAway);
-    console.log('****************************************************************');
+    console.log('*********************************************************************************');
+    console.log( 'Dr. Bunny could get from her start point to Easter Bunny HQ in a mere', this.minimumBlocksAway, 'blocks.');
+    console.log('*********************************************************************************');
 };
 
 /**

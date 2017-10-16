@@ -19,10 +19,11 @@ function Test(testInput) {
  * Execute running the EasterBunnyHQ app and checks results
  */
 Test.prototype.runTest = function () {
-    console.log('\n****** Running FindEasterBunnyHQ Tests ******\n', this.testInput);
+    console.log('\n****** Running FindEasterBunnyHQ Tests ******\n');
     var bunnyTrip;
     this.testInput.forEach(function (input) {
         console.log('\n___Test ', input.id, '___');
+        console.log('input sequence', input.sequence);
         bunnyTrip = new FindEasterBunnyHQ(input.sequence);
         bunnyTrip.go();
         console.log('Test ', input.id, 'Result |  Expected Blocks:', input.expectedBlocksAway, ' Actual Blocks:', bunnyTrip.minimumBlocksAway);
