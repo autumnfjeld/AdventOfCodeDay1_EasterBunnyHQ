@@ -48,6 +48,7 @@ Direction.prototype.turn = function (turnDirection) {
 };
 
 
+
 /**
  * Track the position of Dr. Bunny in the city grid in terms of a Cartesian grid
  * @constructor
@@ -78,7 +79,7 @@ Position.prototype.updatePosition = function (distance, directionVector) {
 
 /**
  * Find the location of the Easter Bunny HQ from a given sequence of movements in a city grid
- * @param {Array} sequence
+ * @param {Array} sequence - array of strings
  * @constructor
  */
 function FindEasterBunnyHQ(sequence) {
@@ -95,7 +96,7 @@ function FindEasterBunnyHQ(sequence) {
 /**
  * Break the sequence strings into turn direction and travel distance
  * @param {Array} sequence
- * @returns {Array}
+ * @returns {Object}
  */
 FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
     return sequence.map(function (instruction) {
@@ -112,9 +113,9 @@ FindEasterBunnyHQ.prototype.parseSequence = function (sequence) {
 FindEasterBunnyHQ.prototype.go = function(){
     this.hopAlongTheBlocks();
     this.computeMinBunnyBlocks();
-    console.log('*********************************************************************************');
-    console.log( 'Dr. Bunny could get from her start point to Easter Bunny HQ in a mere', this.minimumBlocksAway, 'blocks.');
-    console.log('*********************************************************************************');
+    console.log('  *********************************************************************************');
+    console.log( '  Dr. Bunny could get from her start point to Easter Bunny HQ in a mere', this.minimumBlocksAway, 'blocks.');
+    console.log('  *********************************************************************************');
 };
 
 /**
@@ -143,16 +144,16 @@ FindEasterBunnyHQ.prototype.computeMinBunnyBlocks = function () {
 
 /**
  * Export function to call via npm script tor run app with specified input data
- * @returns {null|*}
+ * @returns {number}
  */
 function run() {
-    // Provided input from my http://adventofcode.com/2016/day/1/input
+    // My puzzle input from my http://adventofcode.com/2016/day/1/input
     var input = {
         sequence: ['L2', 'L3', 'L3', 'L4', 'R1', 'R2', 'L3', 'R3', 'R3', 'L1', 'L3', 'R2', 'R3', 'L3', 'R4', 'R3', 'R3', 'L1', 'L4', 'R4', 'L2', 'R5', 'R1', 'L5', 'R1', 'R3', 'L5', 'R2', 'L2', 'R2', 'R1', 'L1', 'L3', 'L3', 'R4', 'R5', 'R4', 'L1', 'L189', 'L2', 'R2', 'L5', 'R5', 'R45', 'L3', 'R4', 'R77', 'L1', 'R1', 'R194', 'R2', 'L5', 'L3', 'L2', 'L1', 'R5', 'L3', 'L3', 'L5', 'L5', 'L5', 'R2', 'L1', 'L2', 'L3', 'R2', 'R5', 'R4', 'L2', 'R3', 'R5', 'L2', 'L2', 'R3', 'L3', 'L2', 'L1', 'L3', 'R5', 'R4', 'R3', 'R2', 'L1', 'R2', 'L5', 'R4', 'L5', 'L4', 'R4', 'L2', 'R5', 'L3', 'L2', 'R4', 'L1', 'L2', 'R2', 'R3', 'L2', 'L5', 'R1', 'R1', 'R3', 'R4', 'R1', 'R2', 'R4', 'R5', 'L3', 'L5', 'L3', 'L3', 'R5', 'R4', 'R1', 'L3', 'R1', 'L3', 'R3', 'R3', 'R3', 'L1', 'R3', 'R4', 'L5', 'L3', 'L1', 'L5', 'L4', 'R4', 'R1', 'L4', 'R3', 'R3', 'R5', 'R4', 'R3', 'R3', 'L1', 'L2', 'R1', 'L4', 'L4', 'L3', 'L4', 'L3', 'L5', 'R2', 'R4', 'L2']
     };
 
     var bunnyTrip = new FindEasterBunnyHQ(input.sequence);
-    bunnyTrip.go()
+    bunnyTrip.go();
     return bunnyTrip.minimumBlocksAway;
 }
 
