@@ -22,15 +22,15 @@ Test.prototype.runTest = function () {
     console.log('\n****** Running FindEasterBunnyHQ Tests ******\n');
     var bunnyTrip;
     this.testInput.forEach(function (input) {
-        console.log('\n___Test ', input.id, '___');
-        console.log('input sequence', input.sequence);
+        console.log('\nTest', input.id, '_______________');
+        console.log('  input sequence', input.sequence);
         bunnyTrip = new FindEasterBunnyHQ(input.sequence);
         bunnyTrip.go();
-        console.log('Test ', input.id, 'Result |  Expected Blocks:', input.expectedBlocksAway, ' Actual Blocks:', bunnyTrip.minimumBlocksAway);
+        console.log('  Expected Blocks:', input.expectedBlocksAway, ' Actual Blocks:', bunnyTrip.minimumBlocksAway);
         if (bunnyTrip.minimumBlocksAway === input.expectedBlocksAway) {
-            console.log('Yipee!  Test passed!');
+            console.log('  Yipee!  Test passed!');
         } else {
-            console.log('UhOh. Test failed. :( ');
+            console.log('  UhOh. Test failed. :( ');
         }
     });
 };
@@ -50,6 +50,11 @@ var testInput = [
         id: 3,
         sequence: ['R5', 'L5', 'R5', 'R3'],
         expectedBlocksAway: 12
+    },
+    {
+        id: 4,
+        sequence: ['L2', 'L1', 'L4', 'R1', 'R6', 'R5', 'R6'],
+        expectedBlocksAway: 5
     }
 ];
 
