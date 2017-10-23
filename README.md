@@ -1,6 +1,6 @@
-# Advent of Code Day1: EasterBunnyHQ App
+# Advent of Code Day1: Easter Bunny HQ Node App
 
-This EasterBunnyHQ node app computes the shortest Manhattan distance, in number of city blocks, on a [city grid](https://en.wikipedia.org/wiki/Taxicab_geometry), from a starting position [0,0] to the Easter Bunny Headquarters (EBHQ).  The city grid is represented as a fixed [Cartesian coordinate system](https://en.wikipedia.org/wiki/Coordinate_system#Cartesian_coordinate_system). 
+This Easter Bunny HQ node app computes the location of Easter Bunny Headquarters (EBHQ) on a [city grid](https://en.wikipedia.org/wiki/Taxicab_geometry) from a given sequence of (meandering) directions through the city grid.  The city grid is represented as a fixed [Cartesian coordinate system](https://en.wikipedia.org/wiki/Coordinate_system#Cartesian_coordinate_system). Using the EBHQ coordinates, the Manhattan distance--the shortest path in number of city blocks--between the starting point [0,0] and EBHQ is then computed and reported.
 
 ### Development Environment
 * Mac OS X El Capitan version 10.11.6 (15G1217).
